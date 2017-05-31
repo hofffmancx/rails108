@@ -4,6 +4,7 @@ class GroupsController < ApplicationController
 
   def index
     @groups = Group.all
+
   end
 
   def show
@@ -20,6 +21,7 @@ class GroupsController < ApplicationController
     @group.user = current_user
 
     if @group.save
+      current_user.join!(@group)
       redirect_to groups_path
     else
       render :new
